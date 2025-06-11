@@ -1,0 +1,36 @@
+﻿@model List<string>
+
+@{
+    ViewData["Title"] = "Chỉnh sửa ảnh";
+    var webRootPath = ViewData["WebRootPath"] as string;
+}
+
+<h2>Chỉnh sửa ảnh</h2>
+
+<form asp-action="EditImages" method="post">
+    @Html.AntiForgeryToken()
+    <div id="imageEditContainer">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            var item = Model[i];
+            <div class="image-edit-pair" id="imageEditPair_@i">
+                <div class="image-container" id="imageContainer_@i">
+                    <img id="image_@i" src="@Url.Content(item.Replace(webRootPath, "").Replace("\\", "/"))" alt="Image @(i+1)" />
+                    <button type="button" onclick="editImage(@i)">Chỉnh sửa ảnh</button>
+                </div>
+                <input type="hidden" name="imageFilePaths[@i]" value="@item" />
+            </div>
+        }
+    </div>
+    <div class="form-actions">
+        <button type="submit" name="action" value="ProceedToOCR" class="btn btn-primary">Tiến hành đọc văn bản</button>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        function editImage(index) {
+            alert(`Chỉnh sửa ảnh ${index + 1}. (Thêm logic chỉnh sửa ở đây)`);
+        }
+    </script>
+}

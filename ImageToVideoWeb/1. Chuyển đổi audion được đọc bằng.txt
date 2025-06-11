@@ -1,0 +1,28 @@
+1. kiểm tra CHỈNH SỬA  ẢNH khi load lên NẾU ảnh không đúng 16:9 thì hãy  CẮT ẢNH RA LÀM NHIỀU Tấm ĐỂ PHÙ HƠP VỚI TỶ LỆ ẢNH CẮT THEO TỶ LỆ TRÊN XUỐNG để KO BỊ MẤT các chỉ tiết  ẢNH
+2.THÊM TÍNH NĂNG NỘP CÁC TEXT LẠI THÀNH MỘT VĂN BẢN để mình có thể chỉnh sửa nội dung dễ hơn
+3. chỉnh sửa ngôn ngữ đọc từ ảnh hiện trả về sai với ngôn ngữ việt
+4. tạo controller mới để làm về ghép video và audion từ text	
+sửa xóa ảnh
+sửa gộp văn bản
+
+
+
+Tôi có một đoạn văn bản là một phần của truyện có phong cách hỗn loạn, lạ thường, đôi khi vô nghĩa.
+
+Hãy giúp tôi viết lại phần này sao cho dẫn dắt câu chuyện mượt mà hơn, hợp lý hơn, nhưng phải giữ nguyên định dạng xuống dòng và vị trí các câu như bản gốc.
+
+Một số dòng có thể chỉ là dấu phẩy hoặc ngắt câu — hãy thêm các đoạn thoại để dẫn dắt câu chuyện .
+
+Các câu thoại kỳ lạ hoặc nửa Anh nửa Việt không cần giữ lại, nhưng bạn hãy chỉnh sửa để nó dễ hiểu hơn với câu chuyện.
+
+Mục tiêu là:
+
+Dẫn dắt câu chuyện hợp lý hơn.
+
+Vẫn giữ nguyên bố cục dòng xuống hàng, các dấu ngắt.
+
+Phong cách hơi kỳ dị, "vô nghĩa có chủ đích", được phép giữ lại.
+
+câu chuyện không cọn ngoặc kép dấm chấm , phẩy, và ký tự đặc biệt
+
+Dưới đây là văn bản cần sửa:

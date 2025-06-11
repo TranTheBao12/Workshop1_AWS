@@ -1,0 +1,265 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chuyển ảnh thành Video - ImageToVideoWeb</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom CSS for Inter font and animations */
+        body {
+            display: flex;
+            justify-content: center;
+            padding: 4px;
+            min-height: 100vh;
+        }
+
+        /* Keyframe for fade-in animation */
+         fadeIn {
+            from
+
+        {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        }
+
+        /* Apply fade-in animation to the main card */
+        .animated-card {
+            animation: fadeIn 1s ease-out forwards;
+            max-width: 1200px; /* Giới hạn chiều rộng tối đa */
+            width: 100%;
+        }
+
+        /* Hover effect for interactive elements */
+        .hover-scale-bounce:hover {
+            transform: scale(1.02) translateY(-2px);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .custom-file-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .file-upload-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+            .file-upload-box.images {
+                border-color: #60a5fa;
+                background-color: #eff6ff;
+                color: #1e40af;
+            }
+
+                .file-upload-box.images:hover {
+                    border-color: #3b82f6;
+                    background-color: #dbeafe;
+                }
+
+            .file-upload-box.folder {
+                border-color: #a78bfa;
+                background-color: #f5f3ff;
+                color: #6b21a8;
+            }
+
+                .file-upload-box.folder:hover {
+                    border-color: #8b5cf6;
+                    background-color: #ede9fe;
+                }
+
+        .btn-process {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 1.125rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform: translateY(0);
+            transition: all 0.3s ease-in-out;
+            background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+            color: white;
+        }
+
+            .btn-process:hover {
+                transform: scale(1.05) translateY(-2px);
+            }
+
+        .error-message {
+            color: #dc2626;
+            background-color: #fee2e2;
+            border: 1px solid #fecaca;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        /* Style for recent videos sidebar */
+        .recent-videos {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .video-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+            .video-item video {
+                width: 60px;
+                height: 40px;
+                object-fit: cover;
+                margin-right: 0.75rem;
+            }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 min-h-screen flex items-center justify-center p-4">
+    <div class="animated-card bg-white rounded-3xl shadow-2xl p-8 md:p-12 text-center max-w-2xl w-full relative overflow-hidden md:flex md:space-x-8 mx-auto">
+        <!-- Decorative background circles -->
+        <div class="absolute -top-10 -left-10 w-48 h-48 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div class="absolute -bottom-10 -right-10 w-48 h-48 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+
+        <div class="w-full md:w-2/3">
+            <h2 class="text-5xl font-extrabold text-gray-800 mb-6 leading-tight relative z-10">
+                Biến Ảnh thành Video
+            </h2>
+            <p class="text-gray-600 mb-10 text-xl relative z-10">
+               
+            </p>
+
+            <form asp-action="UploadImages" method="post" enctype="multipart/form-data" class="space-y-8 relative z-10">
+                @Html.AntiForgeryToken()
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Upload Images Section -->
+                    <div class="form-group">
+                        <label for="images" class="block text-2xl font-semibold text-gray-800 mb-4">
+                            Tải lên Ảnh <span class="text-gray-500 text-base">(.jpg, .png)</span>
+                        </label>
+                        <div class="file-input-wrapper file-upload-box images hover-scale-bounce">
+                            <svg class="w-16 h-16 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L20 16m-2-6a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12V4m0 0l-4 4m4-4l4 4"></path>
+                            </svg>
+                            <span class="text-lg font-medium">Kéo thả hoặc nhấn để chọn ảnh</span>
+                            <input type="file" id="images" name="images" multiple accept="image/jpeg,image/png" class="custom-file-input" />
+                        </div>
+                        <p id="imageFileName" class="text-gray-600 text-md mt-3 font-medium"></p>
+                    </div>
+
+                    <!-- Upload Folder (ZIP) Section -->
+                    <div class="form-group">
+                        <label for="folder" class="block text-2xl font-semibold text-gray-800 mb-4">
+                            Tải lên Thư mục <span class="text-gray-500 text-base">(.zip)</span>
+                        </label>
+                        <div class="file-input-wrapper file-upload-box folder hover-scale-bounce">
+                            <svg class="w-16 h-16 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
+                            </svg>
+                            <span class="text-lg font-medium">Kéo thả hoặc nhấn để chọn thư mục ZIP</span>
+                            <input type="file" id="folder" name="folder" accept=".zip" class="custom-file-input" />
+                        </div>
+                        <p id="folderFileName" class="text-gray-600 text-md mt-3 font-medium"></p>
+                    </div>
+                </div>
+
+                @if (ViewBag.Error != null)
+                {
+                    <p class="error-message mt-6">@ViewBag.Error</p>
+                }
+
+                <button type="submit" class="btn-process w-full mt-10">
+                    <svg class="w-6 h-6 mr-3 -ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    Bắt đầu xử lý Video
+                </button>
+            </form>
+        </div>
+
+        <!-- Recent Videos Sidebar -->
+        <div class="w-full md:w-1/3 mt-8 md:mt-0">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">Video Gần Đây</h3>
+            <div class="recent-videos p-4 bg-gray-50 rounded-lg shadow-inner">
+                @if (ViewData["RecentVideos"] != null && ((List<(string VideoPath, DateTime CreationTime)>)ViewData["RecentVideos"]).Any())
+                {
+                    foreach (var video in (List<(string VideoPath, DateTime CreationTime)>)ViewData["RecentVideos"])
+                    {
+                        <div class="video-item">
+                            <video controls class="w-16 h-12 object-cover" src="https://localhost:7123/@video.VideoPath">
+                                Trình duyệt của bạn không hỗ trợ video này.
+                            </video>
+                            <div class="flex-1 text-left">
+                                <p class="text-sm text-gray-700">Tạo lúc: @video.CreationTime.ToString("dd/MM/yyyy HH:mm")</p>
+                                <form asp-action="DeleteVideo" method="post" class="mt-1">
+                                    <input type="hidden" name="videoPath" value="@video.VideoPath" />
+                                    <button type="submit" class="text-red-500 text-xs hover:text-red-700">Xóa</button>
+                                </form>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p class="text-gray-600 text-sm">Chưa có video nào.</p>
+                }
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Update file names when selected for images input
+        document.getElementById('images').addEventListener('change', function() {
+            const fileNameDisplay = document.getElementById('imageFileName');
+            if (this.files.length > 0) {
+                if (this.files.length === 1) {
+                    fileNameDisplay.textContent = `1 ảnh đã chọn: ${this.files[0].name}`;
+                } else {
+                    fileNameDisplay.textContent = `${this.files.length} ảnh đã chọn.`;
+                }
+            } else {
+                fileNameDisplay.textContent = '';
+            }
+            // Clear the other file input if images are selected
+            document.getElementById('folder').value = '';
+            document.getElementById('folderFileName').textContent = '';
+        });
+
+        // Update file names when selected for folder input
+        document.getElementById('folder').addEventListener('change', function() {
+            const fileNameDisplay = document.getElementById('folderFileName');
+            if (this.files.length > 0) {
+                fileNameDisplay.textContent = `Thư mục ZIP: ${this.files[0].name}`;
+            } else {
+                fileNameDisplay.textContent = '';
+            }
+            // Clear the other file input if folder is selected
+            document.getElementById('images').value = '';
+            document.getElementById('imageFileName').textContent = '';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+file 'C:/Users/USER/Desktop/PromoVideoGenerator_aws/ImageToVideoWeb/ImageToVideoWeb/wwwroot/outputs/95c9faf0-e03b-4ead-9aca-e122ea812a72.mp4'
+file 'C:/Users/USER/Desktop/PromoVideoGenerator_aws/ImageToVideoWeb/ImageToVideoWeb/wwwroot/outputs/523ee1af-ef0d-411f-bdc2-5a1751b0c7f2.mp4'
+file 'C:/Users/USER/Desktop/PromoVideoGenerator_aws/ImageToVideoWeb/ImageToVideoWeb/wwwroot/outputs/db5e2420-6c13-40a0-808c-36ad08879f5d.mp4'
+file 'C:/Users/USER/Desktop/PromoVideoGenerator_aws/ImageToVideoWeb/ImageToVideoWeb/wwwroot/outputs/f0ea3db3-6595-4e8b-83e1-b5417597d44c.mp4'
+file 'C:/Users/USER/Desktop/PromoVideoGenerator_aws/ImageToVideoWeb/ImageToVideoWeb/wwwroot/outputs/b5e5178e-c3d7-448e-a6c0-af4026e6a745.mp4'
+file 'C:/Users/USER/Desktop/PromoVideoGenerator_aws/ImageToVideoWeb/ImageToVideoWeb/wwwroot/outputs/f8b2c5a4-2b81-4efb-9986-70f0c281357b.mp4'
+file 'C:/Users/USER/Desktop/PromoVideoGenerator_aws/ImageToVideoWeb/ImageToVideoWeb/wwwroot/outputs/3beb3156-6363-469e-8ad5-03dc733c5175.mp4'

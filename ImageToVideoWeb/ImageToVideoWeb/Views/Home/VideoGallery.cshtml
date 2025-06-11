@@ -1,0 +1,33 @@
+﻿@model List<(string VideoPath, DateTime CreationTime)>
+
+@{
+    ViewData["Title"] = "Thư viện Video";
+}
+
+<div class="container mx-auto py-8 px-4">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Thư viện Video</h1>
+    @if (Model == null || !Model.Any())
+    {
+        <p class="text-gray-600">Chưa có video nào được tạo.</p>
+    }
+    else
+    {
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach (var video in Model)
+            {
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <video controls class="w-full h-64 object-cover" src="https://localhost:7123/@video.VideoPath">
+                        Trình duyệt của bạn không hỗ trợ video này.
+                    </video>
+                    <div class="p-4">
+                        <p class="text-sm text-gray-600">Tạo lúc: @video.CreationTime.ToString("dd/MM/yyyy HH:mm")</p>
+                        <form asp-action="DeleteVideo" method="post" class="mt-2">
+                            <input type="hidden" name="videoPath" value="@video.VideoPath" />
+                            <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors">Xóa</button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

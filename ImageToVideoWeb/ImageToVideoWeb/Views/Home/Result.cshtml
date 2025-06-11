@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kết Quả Video - Chuyển Văn Bản thành Video</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom CSS for Inter font and animations */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .container {
+            animation: fadeIn 1s ease-out;
+        }
+
+        .video-player {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+
+            .video-player:hover {
+                transform: translateY(-5px);
+            }
+
+        .btn-back {
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+
+            .btn-back:hover {
+                transform: translateY(-2px);
+            }
+        fadeIn {
+            from
+
+        {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-100 to-purple-100 min-h-screen flex items-center justify-center p-4">
+    <div class="container bg-white rounded-xl shadow-2xl p-8 md:p-12 text-center max-w-2xl w-full">
+        <h2 class="text-4xl font-extrabold text-gray-800 mb-8 leading-tight">Video của bạn đã sẵn sàng! 🎉</h2>
+
+        @if (!string.IsNullOrEmpty(ViewBag.VideoPath))
+        {
+            <div class="mb-8 relative rounded-lg overflow-hidden video-player">
+                <video controls class="w-full h-auto rounded-lg">
+                    <source src="@ViewBag.VideoPath" type="video/mp4">
+                    Trình duyệt của bạn không hỗ trợ thẻ video.
+                </video>
+            </div>
+            <p class="text-gray-600 mb-6 text-lg">Bạn có thể xem video hoặc tải xuống để chia sẻ.</p>
+            <a href="@ViewBag.VideoPath" download class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 mr-4 focus:outline-none focus:ring-4 focus:ring-green-300">
+                Tải xuống Video
+            </a>
+        }
+        else
+        {
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md relative mb-8" role="alert">
+                <strong class="font-bold">Lỗi!</strong>
+                <span class="block sm:inline">Không thể tạo video. Vui lòng thử lại.</span>
+            </div>
+        }
+
+        <a href="/Home/Index" class="inline-block btn-back bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300">
+            &larr; Quay lại Trang Tải lên
+        </a>
+    </div>
+</body>
+</html>
